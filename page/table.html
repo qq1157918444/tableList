@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="requiresActiveX=true" />
+    <title>商品管理-商品规格</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/pc_reset.css" />
+    <link type="text/css" rel="stylesheet" href="../static/css/goodsku.css" />
+</head>
+
+<body>
+        <!-- type start -->
+        <div class="goods-sku">
+            <div class="title">
+                <h2>商品规格配置</h2>
+            </div>
+            <div class="goods-add">
+                <div class="goods-add-btn" id="js_add_btn"><i>+</i><span>添加规格</span></div>
+            </div>
+            <div class="list" id="js_list_view"></div>
+            <script type="text/template" id="js_list_temp">
+                {{ if(it && it.length > 0){}}
+                <table>
+                    <colgroup>
+                        <col width="15%"><col width="30%"><col width="30%"><col width="25%">
+                    </colgroup>
+                    <thead>
+                    <tr><th>规格名称</th><th>规格类型</th><th>备注</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                    {{ for(var i = 0;i < it.length; i++){}}
+                    <tr>
+                        <td>{{=it[i].attrName}}</td>
+                        <td>{{=it[i].attrValues}}</td>
+                        <td>{{=it[i].attDescription}}</td>
+                        <td>
+                            <span class="edit js-edit" data-attrid="{{=it[i].attrId}}" data-attrname="{{=it[i].attrName}}" data-attrvalues="{{=it[i].attrValues}}" data-attdescription="{{=it[i].attDescription}}">编辑</span>
+                            <span class="del js-del" data-attrid="{{=it[i].attrId}}">删除</span>
+                        </td>
+                    </tr>
+                    {{}}}
+                    </tbody>
+                </table>
+                {{}else{}}
+                <p class="table-warning">暂无规格，请点击右上角“添加规格”进行添加</p>
+                {{}}}
+
+            </script>
+        </div>
+        <!-- type end -->
+<!--pop add start-->
+<div class="m-pop" id="js_update">
+    <div class="m-pop-bg"></div>
+    <div class="m-pop-wrap">
+        <div class="m-pop-header"><span id="js_pop_title">添加规格</span><span id="js_pop_close"></span></div>
+        <div class="m-pop-content">
+            <div class="part part1"><label>规格名称</label><input type="text" placeholder="请输入4字以内的规格名称" id="js_name" maxlength="4" required="required"><span>必填</span></div>
+            <div class="part part2"><label>规格类型</label><input type="text" placeholder="请输入规格类型" id="js_type" maxlength="80" required="required"><span>必填</span></div>
+            <div class="part part3"><div class="part-l">注:</div><div class="part-r">多个规格可选项之间以逗号隔开，比如一部手机有金色、白色和黑色可供选择，规格就填写“金色，白色，黑色”，最多支持80个字（包括逗号）。</div></div>
+            <div class="part part4"><label>备注</label><textarea placeholder="请输入规格备注，比如被用于哪些分类，50字以内" maxlength="50" id="js_dec"></textarea></div>
+        </div>
+        <!--btn start-->
+        <div class="m-pop-btn">
+            <ul class="btn-list">
+                <li><a id="js_submit">保存</a></li>
+                <li><a id="js_cancel">取消</a></li>
+            </ul>
+        </div>
+        <!--btn end-->
+    </div>
+</div>
+<!--pop add end-->
+<!--pop add start-->
+<div class="m-pop" id="js_del">
+    <div class="m-pop-bg"></div>
+    <div class="m-pop-wrap">
+        <div class="m-pop-header">提示</div>
+        <p class="m-pop-warning" id="js_warning"></p>
+        <!--btn start-->
+        <div class="m-pop-btn">
+            <ul class="btn-list">
+                <li><a id="js_del_cancel_btn">取消</a></li>
+                <li><a id="js_del_ok_btn">确定</a></li>
+            </ul>
+        </div>
+        <!--btn end-->
+    </div>
+</div>
+
+<script data-main="../static/js/main" src="../static/js/lib/require.js"></script>
+
+</body>
+</html>
